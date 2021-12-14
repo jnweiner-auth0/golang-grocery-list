@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "rpc/grocery";
+
+// TODO: define the shape of our service (CreateGroceryRequest, CreateGroceryResponse, etc...)
