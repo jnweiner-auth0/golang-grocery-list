@@ -1,0 +1,402 @@
+{
+	"info": {
+		"_postman_id": "c541b7a2-e6a5-4285-8cad-842206d25c95",
+		"name": "Grocery-List",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateGrocery1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"id is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(\"1\");",
+							"});",
+							"pm.test(\"item is milk\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.item).to.eql(\"milk\");",
+							"});",
+							"pm.test(\"quantity is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.quantity).to.eql(\"1\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"item\": \"milk\",\n    \"quantity\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/CreateGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"CreateGrocery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetGrocery1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"id is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(\"1\");",
+							"});",
+							"pm.test(\"item is milk\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.item).to.eql(\"milk\");",
+							"});",
+							"pm.test(\"quantity is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.quantity).to.eql(\"1\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/GetGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"GetGrocery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateGrocery1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"id is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(\"1\");",
+							"});",
+							"pm.test(\"item is chocolate milk\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.item).to.eql(\"chocolate milk\");",
+							"});",
+							"pm.test(\"quantity is 2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.quantity).to.eql(\"2\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1\",\n    \"item\": \"chocolate milk\",\n    \"quantity\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/UpdateGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"UpdateGrocery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetGrocery1 (after update)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"id is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(\"1\");",
+							"});",
+							"pm.test(\"item is chocolate milk\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.item).to.eql(\"chocolate milk\");",
+							"});",
+							"pm.test(\"quantity is 2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.quantity).to.eql(\"2\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteGrocery1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"id is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(\"1\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/DeleteGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"DeleteGrocery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetGrocery1 (after delete)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404 for id that doesn't exist\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/GetGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"GetGrocery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateGrocery2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"id is 2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(\"2\");",
+							"});",
+							"pm.test(\"item is bananas\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.item).to.eql(\"bananas\");",
+							"});",
+							"pm.test(\"quantity is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.quantity).to.eql(\"1\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"item\": \"bananas\",\n    \"quantity\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/CreateGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"CreateGrocery"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListGrocery",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"groceries array contains bananas\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.groceries[0].item).to.eql(\"bananas\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"limit\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/ListGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"ListGrocery"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
