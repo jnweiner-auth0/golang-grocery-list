@@ -145,7 +145,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": \"1\",\n    \"item\": \"chocolate milk\",\n    \"quantity\": 1\n}",
+					"raw": "{\n    \"id\": \"1\",\n    \"item\": \"chocolate milk\",\n    \"quantity\": 2\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -206,7 +206,18 @@
 						}
 					}
 				},
-				"url": null
+				"url": {
+					"raw": "localhost:5050/twirp/service.GroceryService/GetGrocery",
+					"host": [
+						"localhost"
+					],
+					"port": "5050",
+					"path": [
+						"twirp",
+						"service.GroceryService",
+						"GetGrocery"
+					]
+				}
 			},
 			"response": []
 		},
@@ -276,7 +287,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 2\n}",
+					"raw": "{\n    \"id\": 1\n}",
 					"options": {
 						"raw": {
 							"language": "json"
