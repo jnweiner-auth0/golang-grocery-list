@@ -5,13 +5,13 @@ import (
 	"context"
 	"fmt"
 	groceryProto "grocery-list/rpc/grocery"
-)
 
-// TODO: uncomment below once you're ready to fully write out methods
-// import (
-//   config "grocery-list/config"
-//   "github.com/twitchtv/twirp"
-// )
+	// TODO: uncomment below once you're ready to fully write out methods
+
+	config "grocery-list/config"
+
+	"github.com/twitchtv/twirp"
+)
 
 type Server struct{}
 
@@ -19,8 +19,23 @@ type Server struct{}
 // use the GroceryService interface generated in service.twirp.go as a guide
 
 func (*Server) CreateGrocery(ctx context.Context, req *groceryProto.CreateGroceryRequest) (*groceryProto.CreateGroceryResponse, error) {
-	fmt.Println("In CreateGrocery")
-	return &groceryProto.CreateGroceryResponse{}, nil
+	item := req.GetItem()
+	quantity := req.GetQuantity()
+
+	sqlStatement := "INSERT INTO groceries (item, quantity) VALUES ($1, $2) RETURNING id"
+
+	var id int64
+
+	err := config.SqlDB.QueryRow(sqlStatement, item, quantity).Scan(&id)
+	if err != nil {
+		return nil, twirp.NewError(twirp.InvalidArgument, fmt.Sprintf("There was an error creating a grocery: %v", err))
+	}
+
+	return &groceryProto.CreateGroceryResponse{
+		Id:       id,
+		Item:     item,
+		Quantity: quantity,
+	}, nil
 }
 
 func (*Server) GetGrocery(ctx context.Context, req *groceryProto.GetGroceryRequest) (*groceryProto.GetGroceryResponse, error) {
