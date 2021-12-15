@@ -59,8 +59,30 @@ func (*Server) GetGrocery(ctx context.Context, req *groceryProto.GetGroceryReque
 }
 
 func (*Server) UpdateGrocery(ctx context.Context, req *groceryProto.UpdateGroceryRequest) (*groceryProto.UpdateGroceryResponse, error) {
-	fmt.Println("In UpdateGrocery")
-	return &groceryProto.UpdateGroceryResponse{}, nil
+	id := req.GetId()
+	newItem := req.GetItem()
+	newQuantity := req.GetQuantity()
+
+	sqlStatement := "UPDATE groceries SET item=$2, quantity=$3 WHERE id=$1"
+
+	result, err := config.SqlDB.Exec(sqlStatement, id, newItem, newQuantity)
+	if err != nil {
+		return nil, twirp.NewError(twirp.InvalidArgument, fmt.Sprintf("Grocery id: %v could not be updated, err: %v", id, err))
+	}
+
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return nil, twirp.NewError(twirp.InvalidArgument, fmt.Sprintf("Grocery id: %v could not be updated, err: %v", id, err))
+	}
+	if rows == 0 {
+		return nil, twirp.NewError(twirp.InvalidArgument, fmt.Sprintf("Grocery id: %v could not be updated, no matching rows", id))
+	}
+
+	return &groceryProto.UpdateGroceryResponse{
+		Id:       id,
+		Item:     newItem,
+		Quantity: newQuantity,
+	}, nil
 }
 
 func (*Server) DeleteGrocery(ctx context.Context, req *groceryProto.DeleteGroceryRequest) (*groceryProto.DeleteGroceryResponse, error) {
