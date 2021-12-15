@@ -86,8 +86,26 @@ func (*Server) UpdateGrocery(ctx context.Context, req *groceryProto.UpdateGrocer
 }
 
 func (*Server) DeleteGrocery(ctx context.Context, req *groceryProto.DeleteGroceryRequest) (*groceryProto.DeleteGroceryResponse, error) {
-	fmt.Println("In DeleteGrocery")
-	return &groceryProto.DeleteGroceryResponse{}, nil
+	id := req.GetId()
+
+	sqlStatement := "DELETE FROM groceries WHERE id=$1"
+
+	result, err := config.SqlDB.Exec(sqlStatement, id)
+	if err != nil {
+		return nil, twirp.NewError(twirp.InvalidArgument, fmt.Sprintf("Grocery id: %v could not be deleted, err: %v", id, err))
+	}
+
+	rows, err := result.RowsAffected()
+	if err != nil {
+		return nil, twirp.NewError(twirp.InvalidArgument, fmt.Sprintf("Grocery id: %v could not be deleted, err: %v", id, err))
+	}
+	if rows == 0 {
+		return nil, twirp.NewError(twirp.InvalidArgument, fmt.Sprintf("Grocery id: %v could not be deleted, no matching rows", id))
+	}
+
+	return &groceryProto.DeleteGroceryResponse{
+		Id: id,
+	}, nil
 }
 
 func (*Server) ListGrocery(ctx context.Context, req *groceryProto.ListGroceryRequest) (*groceryProto.ListGroceryResponse, error) {
