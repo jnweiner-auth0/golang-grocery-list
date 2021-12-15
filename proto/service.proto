@@ -5,3 +5,60 @@ package service;
 option go_package = "rpc/grocery";
 
 // TODO: define the shape of our service (CreateGroceryRequest, CreateGroceryResponse, etc...)
+
+message CreateGroceryRequest {
+  string item = 2;
+  int64  quantity = 3;
+}
+
+message CreateGroceryResponse {
+  int64 id = 1;
+  string item = 2;
+  int64 quantity = 3;
+}
+
+message GetGroceryRequest {
+  int64 id = 1;
+}
+
+message GetGroceryResponse {
+  int64 id = 1;
+  string item = 2;
+  int64 quantity = 3;
+}
+
+message UpdateGroceryRequest {
+  int64 id = 1;
+  string item = 2;
+  int64 quantity = 3;
+}
+
+message UpdateGroceryResponse {
+  int64 id = 1;
+  string item = 2;
+  int64 quantity = 3;
+}
+
+message DeleteGroceryRequest {
+  int64 id =1;
+}
+
+message DeleteGroceryResponse {
+  int64 id = 1;
+}
+
+message ListGroceryRequest {
+  int64 limit = 1;
+}
+
+message ListGroceryResponse {
+  repeated CreateGroceryResponse groceries = 1;
+}
+
+service GroceryService {
+  rpc CreateGrocery(CreateGroceryRequest) returns (CreateGroceryResponse);
+  rpc GetGrocery(GetGroceryRequest) returns (GetGroceryResponse);
+  rpc UpdateGrocery(UpdateGroceryRequest) returns (UpdateGroceryResponse);
+  rpc DeleteGrocery(DeleteGroceryRequest) returns (DeleteGroceryResponse);
+  rpc ListGrocery(ListGroceryRequest) returns (ListGroceryResponse);
+}

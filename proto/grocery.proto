@@ -5,3 +5,8 @@ package grocery;
 option go_package = "rpc/grocery";
 
 // TODO: define the shape of a Grocery
+
+message Grocery {
+  string item = 2;
+  int64 quantity = 3;
+}
