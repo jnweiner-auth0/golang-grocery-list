@@ -109,6 +109,39 @@ func (*Server) DeleteGrocery(ctx context.Context, req *groceryProto.DeleteGrocer
 }
 
 func (*Server) ListGrocery(ctx context.Context, req *groceryProto.ListGroceryRequest) (*groceryProto.ListGroceryResponse, error) {
-	fmt.Println("In ListGrocery")
-	return &groceryProto.ListGroceryResponse{}, nil
+	limit := int64(25)
+
+	if req.GetLimit() > 0 {
+		limit = req.GetLimit()
+	}
+
+	sqlStatement := "SELECT * from groceries LIMIT $1"
+
+	rows, err := config.SqlDB.Query(sqlStatement, limit)
+	if err != nil {
+		return nil, twirp.NewError(twirp.NotFound, fmt.Sprintf("There was an error listing groceries: %v", err))
+	}
+	defer rows.Close()
+
+	groceries := []*groceryProto.CreateGroceryResponse{}
+
+	for rows.Next() {
+		var id int64
+		var item string
+		var quantity int64
+		err := rows.Scan(&id, &item, &quantity)
+		if err != nil {
+			return nil, twirp.NewError(twirp.NotFound, fmt.Sprintf("There was an error with grocery id: %v, err: %v", id, err))
+		}
+		grocery := groceryProto.CreateGroceryResponse{
+			Id:       id,
+			Item:     item,
+			Quantity: quantity,
+		}
+		groceries = append(groceries, &grocery)
+	}
+
+	return &groceryProto.ListGroceryResponse{
+		Groceries: groceries,
+	}, nil
 }
