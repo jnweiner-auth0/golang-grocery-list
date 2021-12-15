@@ -39,8 +39,23 @@ func (*Server) CreateGrocery(ctx context.Context, req *groceryProto.CreateGrocer
 }
 
 func (*Server) GetGrocery(ctx context.Context, req *groceryProto.GetGroceryRequest) (*groceryProto.GetGroceryResponse, error) {
-	fmt.Println("In GetGrocery")
-	return &groceryProto.GetGroceryResponse{}, nil
+	id := req.GetId()
+
+	sqlStatement := "SELECT item, quantity FROM groceries WHERE id=$1"
+
+	var item string
+	var quantity int64
+
+	err := config.SqlDB.QueryRow(sqlStatement, id).Scan(&item, &quantity)
+	if err != nil {
+		return nil, twirp.NewError(twirp.NotFound, fmt.Sprintf("No documents were found for id: %v, err: %v", id, err))
+	}
+
+	return &groceryProto.GetGroceryResponse{
+		Id:       id,
+		Item:     item,
+		Quantity: quantity,
+	}, nil
 }
 
 func (*Server) UpdateGrocery(ctx context.Context, req *groceryProto.UpdateGroceryRequest) (*groceryProto.UpdateGroceryResponse, error) {
