@@ -4,7 +4,7 @@ package main
 
 import (
 	"fmt"
-	// config "grocery-list/config"
+	config "grocery-list/config"
 	// "grocery-list/server"
 	// groceryProto "grocery-list/rpc/grocery"
 	// "net/http"
@@ -16,7 +16,7 @@ import (
 // 	server := &server.Server{}
 // 	handler := groceryProto.NewGroceryServiceServer(server)
 
-// 	fmt.Println("Server listening on port: %v/n", config.Port)
+// 	fmt.Printf("Server listening on port: %v\n", config.Port)
 
 // 	listener := fmt.Sprintf(":%v", config.Port)
 // 	http.ListenAndServe(listener, handler)
@@ -24,6 +24,6 @@ import (
 
 func main() {
 	fmt.Println("Hello world")
-	// config.ConnectToPostgres()
+	config.ConnectToPostgres()
 	// startServer()
 }

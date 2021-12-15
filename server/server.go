@@ -1,13 +1,16 @@
 package server
 
-// TODO: uncomment below once you've generated your rpc files
-
+// TODO: uncomment below once you've generated your rpc files and you're stubbing methods
 // import (
-// 	config "grocery-list/config"
-// 	groceryProto "grocery-list/rpc/grocery"
-// 	"fmt"
-// 	"strconv"
-// 	"github.com/twitchtv/twirp"
+// 	"context"
+//   "fmt"
+//   groceryProto "grocery-list/rpc/grocery"
+// )
+
+// TODO: uncomment below once you're ready to fully write out methods
+// import (
+//   config "grocery-list/config"
+//   "github.com/twitchtv/twirp"
 // )
 
 type Server struct{}

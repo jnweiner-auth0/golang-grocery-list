@@ -1,3 +1,8 @@
+## How to use this repo
+
+This repo is part of the Marketplace team's [Golang onboarding guide](https://auth0team.atlassian.net/wiki/spaces/eco/pages/2643725202/WIP+Marketplace+Golang+onboarding+guide).
+Follow along using our [step-by-step walkthrough](https://auth0team.atlassian.net/wiki/spaces/eco/pages/2646311412/WIP+Build+your+own+Golang+grocery+list)! 
+
 ## Getting started
 
 ### Prereqs 
@@ -10,17 +15,13 @@
 ```
 $ go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.26
 $ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
-$ go install github.com/twitchtv/twirp/protoc-gen-twirp
+$ go get google.golang.org/grpc
+$ go get github.com/twitchtv/twirp/protoc-gen-twirp
 ```
 
 3. Update your `PATH` so the `protoc` compiler can find the plugins:
 ```
 $ export PATH="$PATH:$(go env GOPATH)/bin"
-```
-
-4. Within your project, install the `lib/pq` driver for Postgres:
-```
-$ go get -u github.com/lib/pq
 ```
 
 Relevant docs:
